@@ -20,6 +20,7 @@
 #import "Masonry.h"
 #import "UIView+ShotMethod.h"
 #import "UIImageView+WebCache.h"
+#import "ZDPicDetailView.h"
 @implementation ContentScroll
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -59,15 +60,13 @@
     CGFloat   scale;
     BOOL      isHiden;
   }
+//返回按钮
 @property (nonatomic,weak)UIButton *backBtn;
 @property (nonatomic,weak)UIButton  *commentBtn;
 @property (nonatomic, weak)ContentScroll *contentScr;
 @property (nonatomic,weak)UILabel  *tittleLable;
 @property (nonatomic,weak)UILabel  *contentLable;
 @property (nonatomic,weak)UILabel  *countLable;
-
-
-
 @end
 
 @implementation PicShowView
@@ -211,31 +210,13 @@
         [self LoadContentDataWithArray:_imageArray];
     });
     for(int i = 0 ; i < imageArray.count ; i++){
-        UIScrollView * sc = [[UIScrollView alloc] initWithFrame:CGRectMake(self.width * i, 0, self.width, self.height)];
-        sc.showsHorizontalScrollIndicator = NO;
-        sc.showsVerticalScrollIndicator = NO;
-        [sc setMinimumZoomScale:.5];
-        [sc setMaximumZoomScale:5.0];
-        
-        UIImageView * imagev = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
-        imagev.contentMode = UIViewContentModeScaleAspectFit;
-        __weak UIImageView * weakImageV = imagev;
-        [imagev setImageWithURL:[NSURL URLWithString:[imageArray objectAtIndex:i]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            if(image){
-                CGSize imageSize = [self imageSize:image.size ] ;
-                CGPoint center = weakImageV.center;
-                weakImageV.frame = CGRectMake(0, 0, imageSize.width, imageSize.height);
-                weakImageV.center = center;
-            }
-            
-                }];
-        [self addGuesturesWithView:imagev];
-        
-        sc.delegate = self;
-        imagev.backgroundColor = [UIColor redColor];
-        [sc addSubview:imagev];
+
+        ZDPicDetailView *sc = [[ZDPicDetailView alloc] initWithFrame:CGRectMake(self.width * i, 0, self.width, self.height) imageUrl:[imageArray objectAtIndex:i]];
+        [sc setSingleTapBlock:^{
+            [self hiddenAction];
+        }];
         [self addSubview:sc];
-        
+    
     }
     
 }
@@ -250,92 +231,7 @@
     NSString *string =[NSString stringWithFormat:@"详情%zd任何平台都有自己的公开规则，我们打开任何一个平台的使用说明里都会有相关规则，比如不能诱导分享、不得滥用服务平台等。纯自由形态下的互联网平台，智慧沦为互联网垃圾的滋生池，而不会有任何有价值的内容突出，规则是必然的。微信公众平台亦如此官方的微信公众平台会实时推出相关规则，让更多用户能够在规则下受益。企业做微信公众号首先应该避免的是，触碰到平台的规则红线。当然，可能会有人怀疑，会不会像Uber，遭遇不明不白的利益冲突式封杀呢？假如有一天自己企业的微信公众号被因为和腾讯出现利益问题，会不会也遭到封杀呢.如果用这种心态，想要在别的平台下生存，那互联网就没有纯净之地了。2014年11月25日，微博开启了对微信的清理之路，新浪市场营销官方微博发出信息：“明天中午（11月26日）12点前如果账号没有清除掉公众账号的推广（包括背景图、粉丝服务后台、微博正文引导等）将面临禁言和封号的可能。”2015年1月，豌豆荚发公开信称奇遭到百度手机助手封杀， 当时豌豆荚还很可笑的宣称“豌豆荚不会“以暴制暴”，屏蔽百度手机助手，我们相信在这个依然开放的世界，沟通最终可以解决问题。”，而实际上到了2015年10月份，豌豆荚对百度多款APP均进行了封杀行为。我们打开任何一个平台的使用说明里都会有相关规则，比如不能诱导分享、不得滥用服务平台等。纯自由形态下的互联网平台，智慧沦为互联网垃圾的滋生池，而不会有任何有价值的内容突出，规则是必然的。微信公众平台亦如此官方的微信公众平台会实时推出相关规则，让更多用户能够在规则下受益。企业做微信公众号首先应该避免的是，触碰到平台的规则红线。当然，可能会有人怀疑，会不会像Uber，遭遇不明不白的利益冲突式封杀呢?平台的使用说明里都会有相关规则，比如不能诱导分享、不得滥用服务平台等。纯自由形态下的互联网平台，智慧沦为互联网垃圾的滋生池，而不会有任何有价值的内容突出，规则是必然的。微信公众平台亦如此官方的微信公众平台会实时推出相关规则，让更多用户能够在规则下受益。企业做微信公众号首先应该避免的是，触碰到平台的规则红线。当然，可能会有人怀疑，会不会像Uber，遭遇不明不白的利益冲突式封杀呢？假如有一天自己企业的微信公众号被因为和腾讯出现利益问题，会不会也遭到封杀呢.如果用这种心态，想要在别的平台下生存，那互联网就没有纯净之地了。2014年11月25日，微博开启了对微信的清理之路，新浪市场营销官方微博发出信息：“明天中午（11月26日）12点前如果账号没有清除掉公众账号的推广（包括背景图、粉丝服务后台、微博正文引导等）将面临禁言和封号的可能。”2015年1月，豌豆荚发公开信称奇遭到百度手机助手封杀， 当时豌豆荚还很可笑的宣称“豌豆荚不会“以暴制暴”，屏蔽百度手机助手，我们相信在这个依然开放的世界，沟通最终可以解决问题。”，而实际上到了2015年10月份，豌豆荚对百度多款APP均进行了封杀行为。我们打开任何一个平台的使用说明里都会有相关规则，比如不能诱导分享、不得滥用服务平台等。纯",currentPage+1];
     [self.contentScr setContentLableWithString:string];
     }
-//- (void)reSetString:(NSString*)string lable:(UILabel *)lable{
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        lable.text = string;
-//        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-//        dic[NSFontAttributeName] = [UIFont systemFontOfSize:13];
-//        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//        paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
-//        dic[NSParagraphStyleAttributeName] = paragraphStyle.copy;
-//        CGRect rect = [lable.text boundingRectWithSize:CGSizeMake(WINDOWSIZE.width - 2*MARGINLEFT, MAXFLOAT) options:NSStringDrawingUsesDeviceMetrics|NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:dic context:nil];
-//        lable.frame = rect;
-//        [lable sizeToFit];
-//        self.contentScr.contentSize =CGSizeMake(100, lable.height+5);
-//    });
-//}
-- (CGSize)imageSize:(CGSize)size{
-    if(size.width == 0 || size.height == 0)
-        return CGSizeZero;
-    
-    float xscale = size.width/self.width;
-    float yscale = size.height/self.height;
-    CGSize rsize ;
-    
-    if(xscale > yscale){
-        rsize = CGSizeMake(self.width, size.height / xscale);
-    }else{
-        rsize = CGSizeMake(size.width / yscale, self.height);
-    }
-    return rsize;
-}
-#pragma mark----手势操作
-- (void)addGuesturesWithView:(UIImageView*)view{
-    view.userInteractionEnabled = YES;
-    //单击
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleGuestureJust)];
-    singleTap.numberOfTapsRequired = 1;
-    singleTap.numberOfTouchesRequired =1;
-    [view addGestureRecognizer:singleTap];
-    //双击
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleGuestureJust:)];
-    doubleTap.numberOfTapsRequired = 2;
-    [view addGestureRecognizer:doubleTap];
-    //长按保存
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressJust:)];
-    [view addGestureRecognizer:longPress];
-    [singleTap requireGestureRecognizerToFail:doubleTap];
-    
-}
 
-//单击退出
-- (void)singleGuestureJust{
-    //    [self dismissViewControllerAnimated:YES completion:Nil];
-    NSLog(@"单击");
-    [self hiddenAction];
-}
-
-//双击缩放
-- (void)doubleGuestureJust:(UIGestureRecognizer*)sender{
-    NSLog(@"%@",sender.view);
-    // 解决手势叠加问题
-    for(UIScrollView * sc in self.subviews){
-        if(sc.zoomScale != 1){
-            [sc setZoomScale:1 animated:YES];
-            [UIView animateWithDuration:.3 animations:^{
-                sender.view.transform = CGAffineTransformMakeScale(1, 1);
-                scale = 0;
-            }];
-            return;
-            
-        }
-    }
-    
-    if (!scale) {
-        scale = 2.0;
-        
-        [UIView animateWithDuration:.3 animations:^{
-            sender.view.transform =CGAffineTransformMakeScale(scale, scale);
-        }];
-        
-    }else {
-        [UIView animateWithDuration:.3 animations:^{
-            sender.view.transform = CGAffineTransformMakeScale(1, 1);
-            scale = 0;
-        }];
-    }
-    
-}
 //单击隐藏/显示
 - (void)hiddenAction{
     isHiden = !isHiden;
@@ -347,27 +243,6 @@
         self.contentScr.hidden =isHiden;
     }];
     
-}
-//长按保存
-- (void)longPressJust:(UILongPressGestureRecognizer *)longPress{
-    
-    if ([longPress state] == UIGestureRecognizerStateBegan) {
-        
-    UIImageView *imageView = (UIImageView *)longPress.view;
-                //   UIImageWriteToSavedPhotosAlbum(imageView.image, nil, nil, nil);
-    UIImageWriteToSavedPhotosAlbum(imageView.image, self,
-                                   @selector(image:didFinishSavingWithError:contextInfo:),
-                                   nil);
-            }
-    
-
-}
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
-    if (!error) {
-        NSLog(@"保存成功");
-    }else{
-        NSLog(@" 保存失败");
-    }
 }
 #pragma mark---- 代理方法
 // 滚动视图减速完成，滚动将停止时，调用该方法。一次有效滑动，只执行一次。
@@ -385,6 +260,8 @@
     NSLog(@"scrollViewDidEndDecelerating");
     
 }
+
+//拖拽
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
     if(scrollView ==self){
         for(UIScrollView * sc in scrollView.subviews){
@@ -412,23 +289,5 @@
         }
     }
 }
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
-    UIView * view = [[scrollView subviews] objectAtIndex:0];
-    return view;
-}
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView
-{
-    CGFloat offsetX = (scrollView.bounds.size.width > scrollView.contentSize.width)?
-    (scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5 : 0.0;
-    
-    CGFloat offsetY = (scrollView.bounds.size.height > scrollView.contentSize.height)?
-    (scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5 : 0.0;
-    
-    UIView * view = [[scrollView subviews ] objectAtIndex:0];
-    
-    view.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX,
-                              scrollView.contentSize.height * 0.5 + offsetY);
-}
-
 
 @end

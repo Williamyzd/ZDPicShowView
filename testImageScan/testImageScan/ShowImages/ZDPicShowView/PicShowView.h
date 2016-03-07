@@ -10,6 +10,8 @@
 @interface PicShowView : UIScrollView <UIScrollViewDelegate>
 @property (nonatomic,strong) NSArray *imageArray ;
 @end
+
+//下方的文字内容scroll
 @interface ContentScroll : UIScrollView <UIScrollViewDelegate>
 @property (nonatomic,strong,readwrite) UILabel *contentLable;
 @property (nonatomic,copy) contentStringBlock myBlock;

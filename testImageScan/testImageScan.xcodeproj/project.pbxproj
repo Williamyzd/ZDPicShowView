@@ -42,6 +42,7 @@
 		3D757F841C1DD1740007EA7B /* UIView+ShotMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D757F681C1DD1740007EA7B /* UIView+ShotMethod.m */; };
 		3D757F851C1DD1740007EA7B /* PicShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D757F6B1C1DD1740007EA7B /* PicShowView.m */; };
 		3D757F871C1DD2180007EA7B /* button_setting_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D757F861C1DD2180007EA7B /* button_setting_back@2x.png */; };
+		3DD903F01C8DD948008326E5 /* ZDPicDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD903EF1C8DD948008326E5 /* ZDPicDetailView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,8 @@
 		3D757F6A1C1DD1740007EA7B /* PicShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicShowView.h; sourceTree = "<group>"; };
 		3D757F6B1C1DD1740007EA7B /* PicShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicShowView.m; sourceTree = "<group>"; };
 		3D757F861C1DD2180007EA7B /* button_setting_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_setting_back@2x.png"; sourceTree = "<group>"; };
+		3DD903EE1C8DD948008326E5 /* ZDPicDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDPicDetailView.h; sourceTree = "<group>"; };
+		3DD903EF1C8DD948008326E5 /* ZDPicDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDPicDetailView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +332,8 @@
 			children = (
 				3D757F6A1C1DD1740007EA7B /* PicShowView.h */,
 				3D757F6B1C1DD1740007EA7B /* PicShowView.m */,
+				3DD903EE1C8DD948008326E5 /* ZDPicDetailView.h */,
+				3DD903EF1C8DD948008326E5 /* ZDPicDetailView.m */,
 			);
 			path = ZDPicShowView;
 			sourceTree = "<group>";
@@ -400,7 +405,7 @@
 				TargetAttributes = {
 					3D757EF11C1DD0E60007EA7B = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = 6R6ATH2M3U;
+						DevelopmentTeam = 3VDM289P73;
 					};
 					3D757F0A1C1DD0E60007EA7B = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -489,6 +494,7 @@
 				3D757F751C1DD1740007EA7B /* ViewController+MASAdditions.m in Sources */,
 				3D757F7F1C1DD1740007EA7B /* UIImage+GIF.m in Sources */,
 				3D757F801C1DD1740007EA7B /* UIImage+MultiFormat.m in Sources */,
+				3DD903F01C8DD948008326E5 /* ZDPicDetailView.m in Sources */,
 				3D757F741C1DD1740007EA7B /* View+MASAdditions.m in Sources */,
 				3D757F7D1C1DD1740007EA7B /* SDWebImagePrefetcher.m in Sources */,
 				3D757F701C1DD1740007EA7B /* MASViewAttribute.m in Sources */,
@@ -727,6 +733,7 @@
 				3D757F211C1DD0E60007EA7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3D757F221C1DD0E60007EA7B /* Build configuration list for PBXNativeTarget "testImageScanTests" */ = {
 			isa = XCConfigurationList;
@@ -735,6 +742,7 @@
 				3D757F241C1DD0E60007EA7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3D757F251C1DD0E60007EA7B /* Build configuration list for PBXNativeTarget "testImageScanUITests" */ = {
 			isa = XCConfigurationList;
@@ -743,6 +751,7 @@
 				3D757F271C1DD0E60007EA7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
